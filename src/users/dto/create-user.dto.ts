@@ -15,15 +15,14 @@ export class CreateUserDto {
     this.password = password;
   }
   @IsNotEmpty()
-  id: string;
   fullName: string;
-  //   @IsEmail()
-  //   @IsNotEmpty()
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
-  //   @IsNotEmpty()
+  @IsNotEmpty()
   zipCode: number;
-  //   @IsNotEmpty()
+  @IsNotEmpty()
   phone: number;
-  //   @IsNotEmpty()
+  @IsNotEmpty()
   password: string;
 }
