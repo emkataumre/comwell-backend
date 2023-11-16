@@ -1,8 +1,15 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/schemas/user.schema';
+import { SignInResponse } from './dto/signInResponse';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -11,12 +18,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(email: string, pass: string): Promise<any> {
+  async signIn(email: string, pass: string): Promise<SignInResponse> {
     const user = await this.usersService.findOneByEmail(email);
     console.log(user);
-    if (user?.password !== pass) {
+
+    if (!(await bcrypt.compare(pass, user?.password))) {
       throw new UnauthorizedException();
     }
+    //payload=what will be inside of the token
     const payload = { sub: user.fullName, email: user.email };
     return {
       access_token: await this.jwtService.signAsync(payload),
@@ -30,7 +39,7 @@ export class AuthService {
     if (!userEmail) {
       return this.usersService.create(createUserDto);
     } else {
-      console.log('user already exists');
+      throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
     }
   }
 }
