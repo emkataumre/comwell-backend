@@ -4,15 +4,14 @@ import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const createdUser = new this.userModel(createUserDto);
-    // const password = createdUser.password;
-    await createdUser.hashPassword();
+    createdUser.password = await bcrypt.hash(createdUser.password, 10);
     console.log(createdUser);
     return createdUser.save();
   }
