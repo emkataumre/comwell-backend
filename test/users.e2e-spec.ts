@@ -31,16 +31,15 @@ describe('AppController (e2e)', () => {
         1,
         'password',
       );
-      const response = await request(app.getHttpServer)
+      const response = await request(app.getHttpServer())
         .post('/users')
         .send(newUser)
         .expect(201);
       //ACT
       const users = usersService.findAll();
-      console.log(users);
       //ASSERT
       const result = response.body;
-      expect(result[0]._id).toBeDefined();
+      expect(result._id.toString()).toBeDefined();
     });
   });
 });
