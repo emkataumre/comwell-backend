@@ -25,6 +25,9 @@ export class AuthService {
     if (!(await bcrypt.compare(pass, user?.password))) {
       throw new UnauthorizedException();
     }
+    if (email !== user.email) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+    }
     //payload=what will be inside of the token
     const payload = { sub: user.fullName, email: user.email };
     return {
