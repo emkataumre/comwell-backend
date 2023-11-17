@@ -1,19 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
+import { CreateHotelDto } from 'src/hotels/dto/create-hotel.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Room, RoomDocument } from './schemas/room.schema';
 
 @Injectable()
 export class RoomsService {
-  create(createRoomDto: CreateRoomDto) {
-    return 'This action adds a new room';
+  constructor(@InjectModel(Room.name) private roomModel: Model<RoomDocument>) {}
+
+  async findAll(): Promise<Room[]> {
+    return this.roomModel.find().exec();
   }
 
-  findAll() {
-    return `This action returns all rooms`;
+  async findById(id: string): Promise<Room> {
+    return this.roomModel.findById(id).exec();
+  }
+
+  async create(createRoomDto: CreateRoomDto): Promise<Room> {
+    const room = new this.roomModel(createRoomDto);
+    return room.save();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} room`;
+    return this.roomModel.findById(id).exec();
   }
 
   update(id: number, updateRoomDto: UpdateRoomDto) {

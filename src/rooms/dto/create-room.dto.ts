@@ -1,43 +1,56 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsArray,
+  IsInt,
+  ValidateNested,
+  IsNotEmpty,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+
+enum Amenity {
+  Tv = 'TV',
+  Hairdryer = 'HAIRDRYER',
+  Workspace = 'WORKSPACE',
+  Roomservice = 'ROOMSERVICE',
+  Iron = 'IRON',
+  WIFI = 'WIFI',
+}
+
+class BedsDto {
+  @IsInt()
+  @IsNotEmpty()
+  double: number;
+
+  @IsInt()
+  @IsNotEmpty()
+  single: number;
+}
+
+class AmenitiesDto {
+  @IsArray()
+  @IsNotEmpty()
+  @Type(() => String)
+  amenities: Amenity[];
+}
+
 export class CreateRoomDto {
-  constructor(
-    hotelID: string,
-    singleBedAmount: number,
-    doubleBedAmount: number,
-    hasTV: boolean,
-    hasFreeWifi: boolean,
-    hasHairDryer: boolean,
-    hasRoomServiceAvailable: boolean,
-    hasBalcony: boolean,
-    isWorkspace: boolean,
-  ) {
-    this.hotelID = hotelID;
-    this.singleBedAmount = singleBedAmount;
-    this.doubleBedAmount = doubleBedAmount;
-    this.hasTV = hasTV;
-    this.hasFreeWifi = hasFreeWifi;
-    this.hasHairDryer = hasHairDryer;
-    this.hasRoomServiceAvailable = hasRoomServiceAvailable;
-    this.hasBalcony = hasBalcony;
-    this.isWorkspace = isWorkspace;
-  }
+  @IsString()
   @IsNotEmpty()
-  hotelID: string;
-  @IsEmail()
+  name: string;
+
+  @IsString()
   @IsNotEmpty()
-  singleBedAmount: number;
+  description: string;
+
+  @IsArray()
   @IsNotEmpty()
-  doubleBedAmount: number;
-  @IsNotEmpty()
-  hasTV: boolean;
-  @IsNotEmpty()
-  hasFreeWifi: boolean;
-  @IsNotEmpty()
-  hasHairDryer: boolean;
-  @IsNotEmpty()
-  hasRoomServiceAvailable: boolean;
-  @IsNotEmpty()
-  hasBalcony: boolean;
-  @IsNotEmpty()
-  isWorkspace: boolean;
+  pictures: string[];
+
+  @Type(() => BedsDto)
+  @ValidateNested()
+  beds: BedsDto;
+
+  @Type(() => AmenitiesDto)
+  // @ValidateNested()
+  amenities: AmenitiesDto;
 }
