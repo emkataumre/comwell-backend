@@ -14,7 +14,7 @@ export class Booking {
   @Prop({ required: true })
   bookingStartDate: Date;
   @Prop({ required: true })
-  bookingEndData: Date;
+  bookingEndDate: Date;
 }
 
 export const BookingSchema = SchemaFactory.createForClass(Booking);
