@@ -1,90 +1,9 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-// Define the Bed schema and interface
-const BedSchema = new Schema<BedInterface>({
-  double: { type: Number },
-  single: { type: Number },
-});
-
-interface BedInterface {
-  double: number;
-  single: number;
-}
-
-// Create the Bed model
-//const BedModel = mongoose.model<BedInterface & Document>('BedModel', BedSchema);
-
-// Define the Amenities enum and schema
-enum Amenity {
-  Tv = 'TV',
-  Hairdryer = 'HAIRDRYER',
-  Workspace = 'WORKSPACE',
-  Roomservice = 'ROOMSERVICE',
-  Iron = 'IRON',
-  Wifi = 'WIFI',
-}
-
-const AmenitiesSchema = new Schema<AmenitiesInterface>({
-  amenities: { type: [String], enum: Object.values(Amenity), required: true },
-});
-
-interface AmenitiesInterface {
-  amenities: Amenity[];
-}
-
-// Create the Amenities model
-// const AmenityModel = mongoose.model<AmenitiesInterface & Document>(
-//   'AmenityModel',
-//   AmenitiesSchema,
-// );
-
-// Define the Room schema and interface
-const RoomSchema = new Schema<RoomInterface>({
-  name: { type: String },
-  description: { type: String },
-  pictures: { type: [String] },
-  beds: { type: BedSchema },
-  amenities: { type: AmenitiesSchema },
-});
-
-interface RoomInterface {
-  name: string;
-  description: string;
-  pictures: string[];
-  beds: BedInterface;
-  amenities: AmenitiesInterface;
-}
-
-// Create the Room model
-// const RoomModel = mongoose.model<RoomInterface & Document>(
-//   'RoomModel',
-//   RoomSchema,
-// );
-
-// Define the Hotel schema and interface
-const HotelSchema = new Schema<HotelInterface>({
-  country: { type: String },
-  city: { type: String },
-  address: { type: String },
-  phone: { type: Number },
-  title: { type: String },
-  rooms: { type: [RoomSchema] },
-});
-
-interface HotelInterface {
-  country: string;
-  city: string;
-  address: string;
-  phone: number;
-  title: string;
-  rooms: RoomInterface[];
-}
+import mongoose from 'mongoose';
+import { Hotel, HotelSchema } from '../hotels/schemas/hotel.schema';
+import { Amenity } from '../rooms/schemas/room.schema';
 
 // Create the Hotel model
-const HotelModel = mongoose.model<HotelInterface & Document>(
-  'HotelModel',
-  HotelSchema,
-);
+const HotelModel = mongoose.model('HotelModel', HotelSchema, 'hotels');
 
 const mongooseUri = 'mongodb://127.0.0.1:27017/comwell';
 
@@ -95,9 +14,9 @@ db.once('open', async () => {
   console.log('Connected to MongoDB:', mongooseUri);
 
   // Example data to be inserted
-  const exampleData: HotelInterface[] = [
+  const data: Hotel[] = [
     {
-      country: 'Denmark',
+      country: 'Denmark 1',
       city: 'Copenhagen',
       address: '123 Paper st.',
       phone: 123456789,
@@ -111,9 +30,8 @@ db.once('open', async () => {
             double: 1,
             single: 2,
           },
-          amenities: {
-            amenities: [Amenity.Tv, Amenity.Hairdryer, Amenity.Workspace],
-          },
+
+          amenities: [Amenity.Hairdryer, Amenity.Iron],
         },
         // Add more rooms as needed
       ],
@@ -133,9 +51,8 @@ db.once('open', async () => {
             double: 1,
             single: 1,
           },
-          amenities: {
-            amenities: [Amenity.Wifi, Amenity.Roomservice],
-          },
+
+          amenities: [Amenity.Hairdryer, Amenity.Iron, Amenity.Roomservice],
         },
         // Add more rooms as needed
       ],
@@ -155,14 +72,13 @@ db.once('open', async () => {
             double: 2,
             single: 1,
           },
-          amenities: {
-            amenities: [
-              Amenity.Tv,
-              Amenity.Hairdryer,
-              Amenity.Workspace,
-              Amenity.Wifi,
-            ],
-          },
+
+          amenities: [
+            Amenity.Tv,
+            Amenity.Hairdryer,
+            Amenity.Workspace,
+            Amenity.Wifi,
+          ],
         },
         // Add more rooms as needed
       ],
@@ -172,7 +88,7 @@ db.once('open', async () => {
 
   try {
     // Insert data into the collection
-    await HotelModel.insertMany(exampleData);
+    await HotelModel.insertMany(data);
 
     console.log('Data inserted successfully.');
 

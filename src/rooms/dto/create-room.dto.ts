@@ -6,15 +6,16 @@ import {
   IsNotEmpty,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { Amenity } from '../schemas/room.schema';
 
-enum Amenity {
-  Tv = 'TV',
-  Hairdryer = 'HAIRDRYER',
-  Workspace = 'WORKSPACE',
-  Roomservice = 'ROOMSERVICE',
-  Iron = 'IRON',
-  WIFI = 'WIFI',
-}
+// enum Amenity {
+//   Tv = 'TV',
+//   Hairdryer = 'HAIRDRYER',
+//   Workspace = 'WORKSPACE',
+//   Roomservice = 'ROOMSERVICE',
+//   Iron = 'IRON',
+//   WIFI = 'WIFI',
+// }
 
 class BedsDto {
   @IsInt()
