@@ -23,7 +23,7 @@ export class RoomsService {
     return room.save();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.roomModel.findById(id).exec();
   }
 

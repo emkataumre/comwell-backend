@@ -17,7 +17,7 @@ export class Hotel {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.Array, ref: Room.name }] })
+  @Prop([Room])
   rooms: Room[];
 }
 

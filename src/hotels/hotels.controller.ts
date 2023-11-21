@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { HotelsService } from './hotels.service';
 import { CreateHotelDto } from './dto/create-hotel.dto';
@@ -36,9 +37,28 @@ export class HotelsController {
     return this.hotelsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.hotelsService.findOne(id);
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.hotelsService.findOneById(id);
+  // }
+
+  @Get(':title')
+  findAvailableRooms(
+    @Param('title') title: string,
+    @Query('adults') adults: number,
+    @Query('kids') kids: number,
+    @Query('infants') infants: number,
+    @Query('checkIn') checkIn: Date,
+    @Query('checkOut') checkOut: Date,
+  ) {
+    return this.hotelsService.findAvailableRooms(
+      title,
+      adults,
+      kids,
+      infants,
+      checkIn,
+      checkOut,
+    );
   }
 
   @Patch(':id')

@@ -33,6 +33,22 @@ db.once('open', async () => {
 
           amenities: [Amenity.Hairdryer, Amenity.Iron],
         },
+        {
+          name: 'Room 102',
+          description: 'Executive Suite',
+          pictures: ['executive_suite_1.jpg', 'executive_suite_2.jpg'],
+          beds: {
+            double: 2,
+            single: 1,
+          },
+
+          amenities: [
+            Amenity.Tv,
+            Amenity.Hairdryer,
+            Amenity.Workspace,
+            Amenity.Wifi,
+          ],
+        },
         // Add more rooms as needed
       ],
     },
@@ -53,6 +69,22 @@ db.once('open', async () => {
           },
 
           amenities: [Amenity.Hairdryer, Amenity.Iron, Amenity.Roomservice],
+        },
+        {
+          name: 'Room 202',
+          description: 'Executive Suite',
+          pictures: ['executive_suite_1.jpg', 'executive_suite_2.jpg'],
+          beds: {
+            double: 2,
+            single: 1,
+          },
+
+          amenities: [
+            Amenity.Tv,
+            Amenity.Hairdryer,
+            Amenity.Workspace,
+            Amenity.Wifi,
+          ],
         },
         // Add more rooms as needed
       ],
@@ -80,6 +112,22 @@ db.once('open', async () => {
             Amenity.Wifi,
           ],
         },
+        {
+          name: 'Room 302',
+          description: 'Executive Suite',
+          pictures: ['executive_suite_1.jpg', 'executive_suite_2.jpg'],
+          beds: {
+            double: 2,
+            single: 1,
+          },
+
+          amenities: [
+            Amenity.Tv,
+            Amenity.Hairdryer,
+            Amenity.Workspace,
+            Amenity.Wifi,
+          ],
+        },
         // Add more rooms as needed
       ],
     },
@@ -87,6 +135,7 @@ db.once('open', async () => {
   ];
 
   try {
+    await HotelModel.deleteMany({});
     // Insert data into the collection
     await HotelModel.insertMany(data);
 
