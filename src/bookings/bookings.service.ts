@@ -6,11 +6,13 @@ import { Model } from 'mongoose';
 import { Booking, BookingDocument } from './schemas/booking.schema';
 import { UsersService } from 'src/users/users.service';
 import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
+import { HotelsService } from 'src/hotels/hotels.service';
 @Injectable()
 export class BookingsService {
   constructor(
     @InjectModel(Booking.name) private bookingModel: Model<Booking>,
     private usersService: UsersService,
+    private hotelsService: HotelsService,
   ) {}
 
   async createBooking(
@@ -20,23 +22,34 @@ export class BookingsService {
     const existingUser = await this.usersService.findOneByEmail(
       createBookingDto.email,
     );
-    //  console.log(existingUser._id); //this gets me the user id back, i added _id to User class and it fills out automatically, needs to be declared beforehand for it to be called her
     let booking = undefined;
+    const hotelID = await this.hotelsService.findHotelIdByTitle(
+      createBookingDto.hotelTitle,
+    );
+    // const roomID =
     if (!existingUser) {
       const newGuestUser =
         await this.usersService.createGuest(createGuestUserDto);
       booking = new this.bookingModel({
         ...createBookingDto,
         userID: newGuestUser._id,
+        hotelID: hotelID,
+        // roomID: ,
+        startDate: createBookingDto.startDate,
+        endDate: createBookingDto.endDate,
       });
+      console.log('guest booking:', booking);
     } else {
       booking = new this.bookingModel({
         ...createBookingDto,
         userID: existingUser._id,
+        hotelID: hotelID,
+        // roomID: ,
+        startDate: createBookingDto.startDate,
+        endDate: createBookingDto.endDate,
       });
+      console.log('loggedin booking:', booking);
     }
-
-    console.log('this is our existing user booking', booking);
     return booking.save();
   }
   findAll() {

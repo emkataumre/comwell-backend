@@ -37,9 +37,9 @@ export class HotelsController {
     return this.hotelsService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.hotelsService.findOneById(id);
+  // @Get(':title')
+  // findOne(@Param('title') title: string) {
+  //   return this.hotelsService.findOneByTitle(title);
   // }
 
   @Get(':title')

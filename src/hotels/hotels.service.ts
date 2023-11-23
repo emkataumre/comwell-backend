@@ -4,8 +4,8 @@ import { UpdateHotelDto } from './dto/update-hotel.dto';
 import { CreateRoomDto } from 'src/rooms/dto/create-room.dto';
 import { Hotel, HotelDocument } from './schemas/hotel.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Room } from 'src/rooms/schemas/room.schema';
+import { Model, ObjectId } from 'mongoose';
+import { Room, RoomDocument } from 'src/rooms/schemas/room.schema';
 
 @Injectable()
 export class HotelsService {
@@ -17,6 +17,11 @@ export class HotelsService {
     const hotel = new this.hotelModel(createHotelDto);
     return hotel.save();
   }
+
+  // async findRoomByNumber(number: number): Promise<ObjectId> {
+  //   const id = await this.roomModel.findOne({ number }).exec();
+  //   return;
+  // }
 
   async findAvailableRooms(
     title: string,
@@ -44,8 +49,10 @@ export class HotelsService {
     return this.hotelModel.find().exec();
   }
 
-  findOneById(id: string) {
-    return this.hotelModel.findById(id).exec();
+  async findHotelIdByTitle(title: string): Promise<ObjectId> {
+    const hotel = await this.hotelModel.findOne({ title }).exec();
+    const id = hotel._id;
+    return id;
   }
 
   update(id: string, updateHotelDto: UpdateHotelDto) {

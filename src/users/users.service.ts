@@ -24,7 +24,6 @@ export class UsersService {
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<GuestUser> {
     const createdUser = new this.guestUserModel(createGuestUserDto);
-    console.log(createdUser);
     return createdUser.save();
   }
 

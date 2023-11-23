@@ -20,6 +20,8 @@ export class Room {
   @Prop({ required: true })
   name: string;
   @Prop({ required: true })
+  number: number;
+  @Prop({ required: true })
   description: string;
   @Prop({ required: true })
   pictures: string[];
