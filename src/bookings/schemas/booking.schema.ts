@@ -5,15 +5,15 @@ export type BookingDocument = HydratedDocument<Booking>;
 
 @Schema()
 export class Booking {
-  @Prop({ required: true })
+  @Prop()
   userID: string;
-  @Prop({ required: true })
+  @Prop()
   hotelID: string;
-  @Prop({ required: true })
+  @Prop()
   roomID: string;
-  @Prop({ required: true })
+  @Prop()
   bookingStartDate: Date;
-  @Prop({ required: true })
+  @Prop()
   bookingEndDate: Date;
 }
 

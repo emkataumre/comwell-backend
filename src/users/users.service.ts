@@ -5,13 +5,26 @@ import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
+import { CreateGuestUserDto } from './dto/create-guest-user.dto';
+import { GuestUser } from './schemas/guest-user.schema';
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    @InjectModel(GuestUser.name) private guestUserModel: Model<GuestUser>,
+  ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const createdUser = new this.userModel(createUserDto);
     createdUser.password = await bcrypt.hash(createdUser.password, 10);
+    console.log(createdUser);
+    return createdUser.save();
+  }
+
+  async createGuest(
+    createGuestUserDto: CreateGuestUserDto,
+  ): Promise<GuestUser> {
+    const createdUser = new this.guestUserModel(createGuestUserDto);
     console.log(createdUser);
     return createdUser.save();
   }

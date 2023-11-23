@@ -5,17 +5,27 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking, BookingDocument } from './schemas/booking.schema';
 import { UsersService } from 'src/users/users.service';
+import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 @Injectable()
 export class BookingsService {
   constructor(
-    @InjectModel(Booking.name) private bookingModel: Model<BookingDocument>,
+    @InjectModel(Booking.name) private bookingModel: Model<Booking>,
+    private usersService: UsersService,
   ) {}
 
-  createBooking(createBookingDto: CreateBookingDto): Promise<Booking> {
+  async createBooking(
+    createBookingDto: CreateBookingDto,
+    createGuestUserDto: CreateGuestUserDto,
+  ): Promise<Booking> {
     const booking = new this.bookingModel(createBookingDto);
-    let userService: UsersService;
-    const getUser = userService.findOneByEmail(email);
-    console.log(getUser);
+    const user = await this.usersService.findOneByEmail(createBookingDto.email);
+    //console.log(user._id); //this gets me the user id back, i added _id to User class and it fills out automatically, needs to be declared beforehand for it to be called her
+
+    if (!user) {
+      const user = await this.usersService.createGuest(createGuestUserDto);
+      console.log(user);
+      return booking.save();
+    }
     return booking.save();
   }
   findAll() {

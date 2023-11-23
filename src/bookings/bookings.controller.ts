@@ -11,6 +11,7 @@ import { BookingsService } from './bookings.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { Booking } from './schemas/booking.schema';
+import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -18,8 +19,14 @@ export class BookingsController {
 
   // // Bookings
   @Post()
-  createBooking(@Body() booking: CreateBookingDto): Promise<Booking> {
-    return this.bookingsService.createBooking(booking);
+  createBooking(
+    @Body() createBookingDto: CreateBookingDto,
+    createGuestUserDto: CreateGuestUserDto,
+  ): Promise<Booking> {
+    return this.bookingsService.createBooking(
+      createBookingDto,
+      createGuestUserDto,
+    );
   }
 
   @Get()
