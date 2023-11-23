@@ -17,15 +17,26 @@ export class BookingsService {
     createBookingDto: CreateBookingDto,
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
-    const booking = new this.bookingModel(createBookingDto);
-    const user = await this.usersService.findOneByEmail(createBookingDto.email);
-    //console.log(user._id); //this gets me the user id back, i added _id to User class and it fills out automatically, needs to be declared beforehand for it to be called her
-
-    if (!user) {
-      const user = await this.usersService.createGuest(createGuestUserDto);
-      console.log(user);
-      return booking.save();
+    const existingUser = await this.usersService.findOneByEmail(
+      createBookingDto.email,
+    );
+    //  console.log(existingUser._id); //this gets me the user id back, i added _id to User class and it fills out automatically, needs to be declared beforehand for it to be called her
+    let booking = undefined;
+    if (!existingUser) {
+      const newGuestUser =
+        await this.usersService.createGuest(createGuestUserDto);
+      booking = new this.bookingModel({
+        ...createBookingDto,
+        userID: newGuestUser._id,
+      });
+    } else {
+      booking = new this.bookingModel({
+        ...createBookingDto,
+        userID: existingUser._id,
+      });
     }
+
+    console.log('this is our existing user booking', booking);
     return booking.save();
   }
   findAll() {

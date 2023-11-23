@@ -21,7 +21,7 @@ export class BookingsController {
   @Post()
   createBooking(
     @Body() createBookingDto: CreateBookingDto,
-    createGuestUserDto: CreateGuestUserDto,
+    @Body() createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     return this.bookingsService.createBooking(
       createBookingDto,
