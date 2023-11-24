@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateHotelDto } from './dto/create-hotel.dto';
 import { UpdateHotelDto } from './dto/update-hotel.dto';
-import { CreateRoomDto } from 'src/rooms/dto/create-room.dto';
 import { Hotel, HotelDocument } from './schemas/hotel.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId } from 'mongoose';
-import { Room, RoomDocument } from 'src/rooms/schemas/room.schema';
+import { Model } from 'mongoose';
+import { Room } from 'src/rooms/schemas/room.schema';
 
 @Injectable()
 export class HotelsService {
@@ -21,7 +20,6 @@ export class HotelsService {
   async findRoomByNumber(id: string, roomNumber: number): Promise<Room> {
     const hotel = await this.hotelModel.findById(id).exec();
     const room = hotel.rooms.find((room) => room.number == roomNumber);
-    console.log(room);
     return room;
   }
 
@@ -42,7 +40,6 @@ export class HotelsService {
       (room) =>
         room.beds.single + room.beds.double * 2 >= bookingCapacityRequired,
     );
-    console.log(arrayOfAvailableRooms);
 
     return arrayOfAvailableRooms;
   }

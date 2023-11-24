@@ -3,7 +3,7 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Booking, BookingDocument } from './schemas/booking.schema';
+import { Booking } from './schemas/booking.schema';
 import { UsersService } from 'src/users/users.service';
 import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 import { HotelsService } from 'src/hotels/hotels.service';
@@ -22,7 +22,7 @@ export class BookingsService {
     const existingUser = await this.usersService.findOneByEmail(
       createBookingDto.email,
     );
-    let booking = undefined;
+    let booking;
     const hotel = await this.hotelsService.findHotelByTitle(
       createBookingDto.hotelTitle,
     );
@@ -43,7 +43,6 @@ export class BookingsService {
         startDate: createBookingDto.startDate,
         endDate: createBookingDto.endDate,
       });
-      console.log('guest booking:', booking);
     } else {
       booking = new this.bookingModel({
         ...createBookingDto,
@@ -53,7 +52,6 @@ export class BookingsService {
         startDate: createBookingDto.startDate,
         endDate: createBookingDto.endDate,
       });
-      console.log('loggedin booking:', booking);
     }
     return booking.save();
   }

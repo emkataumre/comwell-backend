@@ -17,7 +17,7 @@ import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
-  // // Bookings
+  // Bookings
   @Post()
   createBooking(
     @Body() createBookingDto: CreateBookingDto,

@@ -16,7 +16,10 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+    this.usersService = usersService;
+    this.jwtService = jwtService;
+  }
 
   async signIn(email: string, pass: string): Promise<SignInResponse> {
     const user = await this.usersService.findOneByEmail(email);
@@ -24,7 +27,7 @@ export class AuthService {
     if (!(await bcrypt.compare(pass, user?.password))) {
       throw new UnauthorizedException();
     }
-    //payload=what will be inside of the token
+    //Payload: The data that the token contains
     const payload = { sub: user.fullName, email: user.email };
     return {
       access_token: await this.jwtService.signAsync(payload),
@@ -35,10 +38,9 @@ export class AuthService {
     const userEmail = await this.usersService.findOneByEmail(
       createUserDto.email,
     );
-    if (!userEmail) {
-      return this.usersService.create(createUserDto);
-    } else {
+    if (userEmail)
       throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
-    }
+
+    return this.usersService.create(createUserDto);
   }
 }

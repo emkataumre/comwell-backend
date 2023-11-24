@@ -1,6 +1,4 @@
-// room.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-// import { Amenities, AmenitiesSchema } from './amenities.schema';
 import { Beds } from './beds.schemas';
 import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 

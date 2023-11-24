@@ -11,8 +11,6 @@ import {
 import { HotelsService } from './hotels.service';
 import { CreateHotelDto } from './dto/create-hotel.dto';
 import { UpdateHotelDto } from './dto/update-hotel.dto';
-import { CreateRoomDto } from 'src/rooms/dto/create-room.dto';
-import { Hotel } from './schemas/hotel.schema';
 
 @Controller('hotels')
 export class HotelsController {
