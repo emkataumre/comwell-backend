@@ -39,7 +39,7 @@ export class BookingsService {
         ...createBookingDto,
         userID: newGuestUser._id,
         hotelID: hotelID,
-        roomID: room[0]._id,
+        roomID: room._id,
         startDate: createBookingDto.startDate,
         endDate: createBookingDto.endDate,
       });
@@ -49,7 +49,7 @@ export class BookingsService {
         ...createBookingDto,
         userID: existingUser._id,
         hotelID: hotelID,
-        roomID: room[0]._id,
+        roomID: room._id,
         startDate: createBookingDto.startDate,
         endDate: createBookingDto.endDate,
       });

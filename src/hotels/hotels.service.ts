@@ -18,9 +18,10 @@ export class HotelsService {
     return hotel.save();
   }
 
-  async findRoomByNumber(id: string, roomNumber: number): Promise<Room[]> {
+  async findRoomByNumber(id: string, roomNumber: number): Promise<Room> {
     const hotel = await this.hotelModel.findById(id).exec();
-    const room = hotel.rooms.filter((room) => room.number == roomNumber);
+    const room = hotel.rooms.find((room) => room.number == roomNumber);
+    console.log(room);
     return room;
   }
 
