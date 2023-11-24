@@ -23,7 +23,6 @@ describe('AppController (e2e)', () => {
 
   describe('GET users', () => {
     it('get me all available users', async () => {
-      //ARRANGE
       const newUser = new CreateUserDto(
         'Emil The SmartPants',
         'emil@gmail.com',
@@ -35,9 +34,7 @@ describe('AppController (e2e)', () => {
         .post('/users')
         .send(newUser)
         .expect(201);
-      //ACT
       const users = usersService.findAll();
-      //ASSERT
       const result = response.body;
       expect(result._id.toString()).toBeDefined();
     });

@@ -43,6 +43,5 @@ export class CreateRoomDto {
   beds: BedsDto;
 
   @Type(() => AmenitiesDto)
-  // @ValidateNested()
   amenities: AmenitiesDto;
 }

@@ -9,8 +9,7 @@ export class GuestUser {
   _id: string;
   @Prop({ required: true })
   fullName: string;
-  @Prop({ required: true })
-  //Add unique true!!
+  @Prop({ required: true, unique: true })
   email: string;
   @Prop({ required: true })
   phone: number;
