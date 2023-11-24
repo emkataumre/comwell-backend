@@ -18,10 +18,11 @@ export class HotelsService {
     return hotel.save();
   }
 
-  // async findRoomByNumber(number: number): Promise<ObjectId> {
-  //   const id = await this.roomModel.findOne({ number }).exec();
-  //   return;
-  // }
+  async findRoomByNumber(id: string, roomNumber: number): Promise<Room[]> {
+    const hotel = await this.hotelModel.findById(id).exec();
+    const room = hotel.rooms.filter((room) => room.number == roomNumber);
+    return room;
+  }
 
   async findAvailableRooms(
     title: string,
@@ -49,10 +50,9 @@ export class HotelsService {
     return this.hotelModel.find().exec();
   }
 
-  async findHotelIdByTitle(title: string): Promise<ObjectId> {
+  async findHotelByTitle(title: string): Promise<Hotel> {
     const hotel = await this.hotelModel.findOne({ title }).exec();
-    const id = hotel._id;
-    return id;
+    return hotel;
   }
 
   update(id: string, updateHotelDto: UpdateHotelDto) {

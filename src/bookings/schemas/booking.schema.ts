@@ -7,11 +7,11 @@ export type BookingDocument = HydratedDocument<Booking>;
 export class Booking {
   @Prop({ auto: true, type: mongoose.Schema.Types.ObjectId })
   _id: string;
-  @Prop({ type: mongoose.Schema.Types.ObjectId })
+  @Prop()
   userID: string;
-  @Prop({ type: mongoose.Schema.Types.ObjectId })
+  @Prop()
   hotelID: string;
-  @Prop({ type: mongoose.Schema.Types.ObjectId })
+  @Prop()
   roomID: string;
   @Prop()
   bookingStartDate: Date;

@@ -23,10 +23,15 @@ export class BookingsService {
       createBookingDto.email,
     );
     let booking = undefined;
-    const hotelID = await this.hotelsService.findHotelIdByTitle(
+    const hotel = await this.hotelsService.findHotelByTitle(
       createBookingDto.hotelTitle,
     );
-    // const roomID =
+    const hotelID = hotel._id.toString();
+    const room = await this.hotelsService.findRoomByNumber(
+      hotelID,
+      createBookingDto.roomNumber,
+    );
+
     if (!existingUser) {
       const newGuestUser =
         await this.usersService.createGuest(createGuestUserDto);
@@ -34,7 +39,7 @@ export class BookingsService {
         ...createBookingDto,
         userID: newGuestUser._id,
         hotelID: hotelID,
-        // roomID: ,
+        roomID: room[0]._id,
         startDate: createBookingDto.startDate,
         endDate: createBookingDto.endDate,
       });
@@ -44,7 +49,7 @@ export class BookingsService {
         ...createBookingDto,
         userID: existingUser._id,
         hotelID: hotelID,
-        // roomID: ,
+        roomID: room[0]._id,
         startDate: createBookingDto.startDate,
         endDate: createBookingDto.endDate,
       });
