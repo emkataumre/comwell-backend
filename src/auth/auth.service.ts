@@ -28,7 +28,11 @@ export class AuthService {
       throw new UnauthorizedException();
     }
     //Payload: The data that the token contains
-    const payload = { sub: user.fullName, email: user.email };
+    const payload = {
+      sub: user.fullName,
+      email: user.email,
+      phone: user.phone,
+    };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
