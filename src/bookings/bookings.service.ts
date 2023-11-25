@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBookingDto } from './dto/create-booking.dto';
+import { CreateHotelBookingDto } from './dto/create-booking.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking } from './schemas/booking.schema';
@@ -15,41 +15,41 @@ export class BookingsService {
   ) {}
 
   async createBooking(
-    createBookingDto: CreateBookingDto,
+    createHotelBookingDto: CreateHotelBookingDto,
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     const existingUser = await this.usersService.findOneByEmail(
-      createBookingDto.email,
+      createGuestUserDto.customerInfo.email,
     );
     let booking;
     const hotel = await this.hotelsService.findHotelByTitle(
-      createBookingDto.hotelTitle,
+      createHotelBookingDto.hotel.hotelName,
     );
     const hotelID = hotel._id.toString();
     const room = await this.hotelsService.findRoomByNumber(
       hotelID,
-      createBookingDto.roomNumber,
+      createHotelBookingDto.hotel.rooms[0].number,
     );
 
     if (!existingUser) {
       const newGuestUser =
         await this.usersService.createGuest(createGuestUserDto);
       booking = new this.bookingModel({
-        ...createBookingDto,
+        ...createHotelBookingDto,
         userID: newGuestUser._id,
         hotelID: hotelID,
         roomID: room._id,
-        startDate: createBookingDto.startDate,
-        endDate: createBookingDto.endDate,
+        startDate: createHotelBookingDto.hotel.dates.startDate,
+        endDate: createHotelBookingDto.hotel.dates.endDate,
       });
     } else {
       booking = new this.bookingModel({
-        ...createBookingDto,
+        ...createHotelBookingDto,
         userID: existingUser._id,
         hotelID: hotelID,
         roomID: room._id,
-        startDate: createBookingDto.startDate,
-        endDate: createBookingDto.endDate,
+        startDate: createHotelBookingDto.hotel.dates.startDate,
+        endDate: createHotelBookingDto.hotel.dates.endDate,
       });
     }
     return booking.save();

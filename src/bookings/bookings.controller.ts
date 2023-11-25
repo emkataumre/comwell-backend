@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
-import { CreateBookingDto } from './dto/create-booking.dto';
+import { CreateHotelBookingDto } from './dto/create-booking.dto';
 import { Booking } from './schemas/booking.schema';
 import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 
@@ -17,9 +17,9 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   // Bookings
-  @Post()
+  @Post('/create-booking')
   createBooking(
-    @Body() createBookingDto: CreateBookingDto,
+    @Body() createBookingDto: CreateHotelBookingDto,
     @Body() createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     return this.bookingsService.createBooking(
