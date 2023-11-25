@@ -10,6 +10,7 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/schemas/user.schema';
 import { SignInResponse } from './dto/signInResponse';
 import * as bcrypt from 'bcrypt';
+import { SignUpResponse } from './dto/signUpResponse';
 
 @Injectable()
 export class AuthService {
@@ -38,13 +39,23 @@ export class AuthService {
     };
   }
 
-  async signUp(createUserDto: CreateUserDto): Promise<User> {
+  async signUp(createUserDto: CreateUserDto): Promise<SignUpResponse> {
     const userEmail = await this.usersService.findOneByEmail(
       createUserDto.email,
     );
-    if (userEmail)
+    if (userEmail) {
       throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
-
-    return this.usersService.create(createUserDto);
+    } else {
+      //Payload: The data that the token contains
+      const payload = {
+        sub: createUserDto.fullName,
+        email: createUserDto.email,
+        phone: createUserDto.phone,
+        zipCode: createUserDto.zipCode,
+      };
+      return {
+        access_token: await this.jwtService.signAsync(payload),
+      };
+    }
   }
 }
