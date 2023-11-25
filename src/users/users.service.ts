@@ -16,6 +16,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const createdUser = new this.userModel(createUserDto);
+    console.log('createdUser', createdUser);
     createdUser.password = await bcrypt.hash(createdUser.password, 10);
     return createdUser.save();
   }
@@ -23,8 +24,9 @@ export class UsersService {
   async createGuest(
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<GuestUser> {
-    const createdUser = new this.guestUserModel(createGuestUserDto);
-    return createdUser.save();
+    const createdGuestUser = new this.guestUserModel(createGuestUserDto);
+    console.log('createdGuestUser', createdGuestUser);
+    return createdGuestUser.save();
   }
 
   findAll(): Promise<User[]> {

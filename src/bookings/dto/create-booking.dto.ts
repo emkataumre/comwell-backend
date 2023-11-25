@@ -1,6 +1,6 @@
 import { Room } from 'src/rooms/schemas/room.schema';
 
-export class CreateHotelBookingDto {
+export class CreateBookingDto {
   hotel: {
     hotelName: string;
     rooms: Room[];
@@ -8,5 +8,11 @@ export class CreateHotelBookingDto {
       startDate: Date;
       endDate: Date;
     };
+  };
+  customerInfo: {
+    _id: string;
+    fullName: string;
+    email: string;
+    phone: number;
   };
 }

@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateHotelBookingDto } from './dto/create-booking.dto';
+import { CreateBookingDto } from './dto/create-booking.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking } from './schemas/booking.schema';
 import { UsersService } from 'src/users/users.service';
 import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 import { HotelsService } from 'src/hotels/hotels.service';
+
 @Injectable()
 export class BookingsService {
   constructor(
@@ -15,41 +16,47 @@ export class BookingsService {
   ) {}
 
   async createBooking(
-    createHotelBookingDto: CreateHotelBookingDto,
+    CreateBookingDto: CreateBookingDto,
+    // createUserDto: CreateUserDto,
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     const existingUser = await this.usersService.findOneByEmail(
-      createGuestUserDto.customerInfo.email,
+      CreateBookingDto.customerInfo.email,
     );
+
+    // console.log('CreateBookingDto', CreateBookingDto);
+    // console.log('existing user', existingUser);
     let booking;
     const hotel = await this.hotelsService.findHotelByTitle(
-      createHotelBookingDto.hotel.hotelName,
+      CreateBookingDto.hotel.hotelName,
     );
     const hotelID = hotel._id.toString();
     const room = await this.hotelsService.findRoomByNumber(
       hotelID,
-      createHotelBookingDto.hotel.rooms[0].number,
+      CreateBookingDto.hotel.rooms[0].number,
     );
-
+    console.log(existingUser);
     if (!existingUser) {
       const newGuestUser =
         await this.usersService.createGuest(createGuestUserDto);
+
+      console.log('only id expected', newGuestUser);
       booking = new this.bookingModel({
-        ...createHotelBookingDto,
+        ...CreateBookingDto,
         userID: newGuestUser._id,
         hotelID: hotelID,
         roomID: room._id,
-        startDate: createHotelBookingDto.hotel.dates.startDate,
-        endDate: createHotelBookingDto.hotel.dates.endDate,
+        startDate: CreateBookingDto.hotel.dates.startDate,
+        endDate: CreateBookingDto.hotel.dates.endDate,
       });
     } else {
       booking = new this.bookingModel({
-        ...createHotelBookingDto,
+        ...CreateBookingDto,
         userID: existingUser._id,
         hotelID: hotelID,
         roomID: room._id,
-        startDate: createHotelBookingDto.hotel.dates.startDate,
-        endDate: createHotelBookingDto.hotel.dates.endDate,
+        startDate: CreateBookingDto.hotel.dates.startDate,
+        endDate: CreateBookingDto.hotel.dates.endDate,
       });
     }
     return booking.save();

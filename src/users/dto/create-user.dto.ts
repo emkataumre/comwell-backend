@@ -14,6 +14,7 @@ export class CreateUserDto {
     this.phone = phone;
     this.password = password;
   }
+
   @IsNotEmpty()
   fullName: string;
   @IsEmail()
