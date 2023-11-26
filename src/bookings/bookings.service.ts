@@ -17,15 +17,12 @@ export class BookingsService {
 
   async createBooking(
     CreateBookingDto: CreateBookingDto,
-    // createUserDto: CreateUserDto,
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     const existingUser = await this.usersService.findOneByEmail(
       CreateBookingDto.customerInfo.email,
     );
 
-    // console.log('CreateBookingDto', CreateBookingDto);
-    // console.log('existing user', existingUser);
     let booking;
     const hotel = await this.hotelsService.findHotelByTitle(
       CreateBookingDto.hotel.hotelName,
@@ -35,12 +32,10 @@ export class BookingsService {
       hotelID,
       CreateBookingDto.hotel.rooms[0].number,
     );
-    console.log(existingUser);
     if (!existingUser) {
       const newGuestUser =
         await this.usersService.createGuest(createGuestUserDto);
 
-      console.log('only id expected', newGuestUser);
       booking = new this.bookingModel({
         ...CreateBookingDto,
         userID: newGuestUser._id,

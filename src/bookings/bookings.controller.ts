@@ -21,12 +21,10 @@ export class BookingsController {
   @Post('/create-booking')
   createBooking(
     @Body() createBookingDto: CreateBookingDto,
-    // @Body() createUserDto: CreateUserDto,
     @Body() createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     return this.bookingsService.createBooking(
       createBookingDto,
-      // createUserDto,
       createGuestUserDto,
     );
   }
