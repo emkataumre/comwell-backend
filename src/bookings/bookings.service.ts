@@ -6,6 +6,7 @@ import { Booking } from './schemas/booking.schema';
 import { UsersService } from 'src/users/users.service';
 import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 import { HotelsService } from 'src/hotels/hotels.service';
+
 @Injectable()
 export class BookingsService {
   constructor(
@@ -15,41 +16,42 @@ export class BookingsService {
   ) {}
 
   async createBooking(
-    createBookingDto: CreateBookingDto,
+    CreateBookingDto: CreateBookingDto,
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<Booking> {
     const existingUser = await this.usersService.findOneByEmail(
-      createBookingDto.email,
+      CreateBookingDto.customerInfo.email,
     );
+
     let booking;
     const hotel = await this.hotelsService.findHotelByTitle(
-      createBookingDto.hotelTitle,
+      CreateBookingDto.hotel.hotelName,
     );
     const hotelID = hotel._id.toString();
     const room = await this.hotelsService.findRoomByNumber(
       hotelID,
-      createBookingDto.roomNumber,
+      CreateBookingDto.hotel.rooms[0].number,
     );
-
     if (!existingUser) {
       const newGuestUser =
         await this.usersService.createGuest(createGuestUserDto);
+
       booking = new this.bookingModel({
-        ...createBookingDto,
+        ...CreateBookingDto,
         userID: newGuestUser._id,
         hotelID: hotelID,
         roomID: room._id,
-        startDate: createBookingDto.startDate,
-        endDate: createBookingDto.endDate,
+        startDate: CreateBookingDto.hotel.dates.startDate,
+        endDate: CreateBookingDto.hotel.dates.endDate,
       });
     } else {
       booking = new this.bookingModel({
-        ...createBookingDto,
+        ...CreateBookingDto,
         userID: existingUser._id,
         hotelID: hotelID,
         roomID: room._id,
-        startDate: createBookingDto.startDate,
-        endDate: createBookingDto.endDate,
+        startDate: CreateBookingDto.hotel.dates.startDate,
+        endDate: CreateBookingDto.hotel.dates.endDate,
       });
     }
     return booking.save();

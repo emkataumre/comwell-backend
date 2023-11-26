@@ -1,7 +1,18 @@
+import { Room } from 'src/rooms/schemas/room.schema';
+
 export class CreateBookingDto {
-  email: string;
-  hotelTitle: string;
-  roomNumber: number;
-  startDate: Date;
-  endDate: Date;
+  hotel: {
+    hotelName: string;
+    rooms: Room[];
+    dates: {
+      startDate: Date;
+      endDate: Date;
+    };
+  };
+  customerInfo: {
+    _id: string;
+    fullName: string;
+    email: string;
+    phone: number;
+  };
 }

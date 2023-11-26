@@ -53,6 +53,7 @@ export class AuthService {
         phone: createUserDto.phone,
         zipCode: createUserDto.zipCode,
       };
+      this.usersService.create(createUserDto);
       return {
         access_token: await this.jwtService.signAsync(payload),
       };

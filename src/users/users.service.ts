@@ -23,8 +23,8 @@ export class UsersService {
   async createGuest(
     createGuestUserDto: CreateGuestUserDto,
   ): Promise<GuestUser> {
-    const createdUser = new this.guestUserModel(createGuestUserDto);
-    return createdUser.save();
+    const createdGuestUser = new this.guestUserModel(createGuestUserDto);
+    return createdGuestUser.save();
   }
 
   findAll(): Promise<User[]> {
