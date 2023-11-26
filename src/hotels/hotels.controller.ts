@@ -21,24 +21,10 @@ export class HotelsController {
     return this.hotelsService.create(createHotelDto);
   }
 
-  // // Rooms
-  // @Post(':id/rooms')
-  // addRoom(
-  //   @Param('id') id: string,
-  //   @Body() room: CreateRoomDto,
-  // ): Promise<Hotel> {
-  //   return this.hotelsService.addRoom(id, room);
-  // }
-
   @Get()
   findAll() {
     return this.hotelsService.findAll();
   }
-
-  // @Get(':title')
-  // findOne(@Param('title') title: string) {
-  //   return this.hotelsService.findOneByTitle(title);
-  // }
 
   @Get(':title')
   findAvailableRooms(
