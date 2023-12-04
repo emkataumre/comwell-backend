@@ -44,14 +44,4 @@ export class HotelsController {
       checkOut,
     );
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHotelDto: UpdateHotelDto) {
-    return this.hotelsService.update(id, updateHotelDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.hotelsService.remove(id);
-  }
 }
