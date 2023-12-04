@@ -13,7 +13,6 @@ export class CreateBookingDto {
   };
   @IsNotEmpty()
   customerInfo: {
-    _id: string;
     fullName: string;
     email: string;
     phone: number;
@@ -24,7 +23,6 @@ export class CreateBookingDto {
     rooms: Room[],
     startDate: Date,
     endDate: Date,
-    customerId: string,
     fullName: string,
     email: string,
     phone: number,
@@ -38,7 +36,6 @@ export class CreateBookingDto {
       },
     };
     this.customerInfo = {
-      _id: customerId,
       fullName,
       email,
       phone,

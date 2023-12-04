@@ -29,7 +29,6 @@ export class BookingsService {
     );
 
     let booking;
-    console.log(existingUser);
     if (!existingUser) {
       const createGuestUserDto = createBookingDto.customerInfo;
       const newGuestUser =
