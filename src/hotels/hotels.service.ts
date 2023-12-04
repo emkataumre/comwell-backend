@@ -52,12 +52,4 @@ export class HotelsService {
     const hotel = await this.hotelModel.findOne({ title }).exec();
     return hotel;
   }
-
-  update(id: string, updateHotelDto: UpdateHotelDto) {
-    return `This action updates a #${id} hotel`;
-  }
-
-  remove(id: string) {
-    return `This action removes a #${id} hotel`;
-  }
 }

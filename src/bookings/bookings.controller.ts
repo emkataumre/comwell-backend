@@ -19,28 +19,7 @@ export class BookingsController {
 
   // Bookings
   @Post('/create-booking')
-  createBooking(
-    @Body() createBookingDto: CreateBookingDto,
-    @Body() createGuestUserDto: CreateGuestUserDto,
-  ): Promise<Booking> {
-    return this.bookingsService.createBooking(
-      createBookingDto,
-      createGuestUserDto,
-    );
-  }
-
-  @Get()
-  findAll() {
-    return this.bookingsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bookingsService.findOne(+id);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bookingsService.remove(+id);
+  createBooking(@Body() createBookingDto: CreateBookingDto): Promise<Booking> {
+    return this.bookingsService.createBooking(createBookingDto);
   }
 }
