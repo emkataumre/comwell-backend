@@ -14,20 +14,18 @@ export class UsersService {
     @InjectModel(GuestUser.name) private guestUserModel: Model<GuestUser>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto) {
     const createdUser = new this.userModel(createUserDto);
     createdUser.password = await bcrypt.hash(createdUser.password, 10);
     return createdUser.save();
   }
 
-  async createGuest(
-    createGuestUserDto: CreateGuestUserDto,
-  ): Promise<GuestUser> {
+  async createGuest(createGuestUserDto: CreateGuestUserDto) {
     const createdGuestUser = new this.guestUserModel(createGuestUserDto);
     return createdGuestUser.save();
   }
 
-  findAll(): Promise<User[]> {
+  findAll() {
     return this.userModel.find().exec();
   }
 
@@ -36,7 +34,7 @@ export class UsersService {
     return user;
   }
 
-  async findOneByEmail(email: string): Promise<User | null> {
+  async findOneByEmail(email: string) {
     return this.userModel.findOne({ email }).exec();
   }
 

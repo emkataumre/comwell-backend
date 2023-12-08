@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Beds } from './beds.schemas';
-import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
 export type RoomDocument = HydratedDocument<Room>;
 
@@ -15,8 +15,6 @@ export enum Amenity {
 
 @Schema()
 export class Room {
-  @Prop({ auto: true, type: mongoose.Schema.Types.ObjectId })
-  _id: ObjectId;
   @Prop({ required: true })
   name: string;
   @Prop({ required: true })

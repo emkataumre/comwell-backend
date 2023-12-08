@@ -19,7 +19,7 @@ export class BookingsController {
 
   // Bookings
   @Post('/create-booking')
-  createBooking(@Body() createBookingDto: CreateBookingDto): Promise<Booking> {
+  createBooking(@Body() createBookingDto: CreateBookingDto) {
     return this.bookingsService.createBooking(createBookingDto);
   }
 }

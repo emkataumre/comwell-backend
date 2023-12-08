@@ -9,15 +9,15 @@ import { Room, RoomDocument } from './schemas/room.schema';
 export class RoomsService {
   constructor(@InjectModel(Room.name) private roomModel: Model<RoomDocument>) {}
 
-  async findAll(): Promise<Room[]> {
+  async findAll() {
     return this.roomModel.find().exec();
   }
 
-  async findById(id: string): Promise<Room> {
+  async findById(id: string) {
     return this.roomModel.findById(id).exec();
   }
 
-  async create(createRoomDto: CreateRoomDto): Promise<Room> {
+  async create(createRoomDto: CreateRoomDto) {
     const room = new this.roomModel(createRoomDto);
     return room.save();
   }

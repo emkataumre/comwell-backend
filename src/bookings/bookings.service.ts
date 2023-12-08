@@ -14,7 +14,7 @@ export class BookingsService {
     private hotelsService: HotelsService,
   ) {}
 
-  async createBooking(createBookingDto: CreateBookingDto): Promise<Booking> {
+  async createBooking(createBookingDto: CreateBookingDto) {
     const existingUser = await this.usersService.findOneByEmail(
       createBookingDto.customerInfo.email,
     );
@@ -53,6 +53,6 @@ export class BookingsService {
 
       console.log(createBookingDto);
     }
-    return booking.save();
+    return booking.save() as Booking;
   }
 }
