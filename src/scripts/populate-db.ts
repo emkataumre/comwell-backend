@@ -19,8 +19,11 @@ db.once('open', async () => {
   const data: Hotel[] = [
     {
       country: 'Denmark',
-      city: 'Aarhus',
-      address: 'Aarhus st. 29',
+      picture:
+        'https://images.pexels.com/photos/594077/pexels-photo-594077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      group: 'Zealand',
+      city: 'City1',
+      address: 'Paper st. 29',
       phone: 123456789,
       title: 'Hotel1',
       rooms: [
@@ -91,8 +94,11 @@ db.once('open', async () => {
     },
     {
       country: 'Denmark',
-      city: 'Aarhus',
-      address: 'Aarhus st. 29',
+      picture:
+        'https://images.pexels.com/photos/1580112/pexels-photo-1580112.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      group: 'Funen',
+      city: 'City2',
+      address: 'Apple st. 29',
       phone: 123456789,
       title: 'Hotel2',
       rooms: [
@@ -163,7 +169,10 @@ db.once('open', async () => {
     },
     {
       country: 'Denmark',
-      city: 'Aalborg',
+      picture:
+        'https://images.pexels.com/photos/705773/pexels-photo-705773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      group: 'Jutland',
+      city: 'City3',
       address: 'Main st 265',
       phone: 123456789,
       title: 'Hotel3',
