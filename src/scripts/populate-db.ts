@@ -24,7 +24,7 @@ db.once('open', async () => {
       group: 'Zealand',
       city: 'City1',
       address: 'Paper st. 29',
-      phone: 123456789,
+      phone: '123456789',
       title: 'Hotel1',
       rooms: [
         {
@@ -99,7 +99,7 @@ db.once('open', async () => {
       group: 'Funen',
       city: 'City2',
       address: 'Apple st. 29',
-      phone: 123456789,
+      phone: '123456789',
       title: 'Hotel2',
       rooms: [
         {
@@ -174,7 +174,7 @@ db.once('open', async () => {
       group: 'Jutland',
       city: 'City3',
       address: 'Main st 265',
-      phone: 123456789,
+      phone: '123456789',
       title: 'Hotel3',
       rooms: [
         {
