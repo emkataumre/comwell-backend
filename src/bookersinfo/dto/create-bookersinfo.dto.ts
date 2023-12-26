@@ -1,10 +1,4 @@
-import {
-  IsNotEmpty,
-  IsOptional,
-  IsEmail,
-  IsPhoneNumber,
-} from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsOptional, IsEmail } from 'class-validator';
 
 export class CreateBookerinfoDto {
   @IsNotEmpty()
@@ -24,9 +18,5 @@ export class CreateBookerinfoDto {
   email: string;
 
   @IsNotEmpty()
-  @Transform((value) =>
-    value === null || value === undefined ? null : Number(value),
-  )
-  @IsPhoneNumber(null, { message: 'Invalid phone number' })
   phone: number;
 }
