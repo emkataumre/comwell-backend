@@ -88,7 +88,13 @@ db.once('open', async () => {
           maxCapacity: 30,
           description:
             'A very nice meeting room with a projector and plenty of space',
-          bulletPoints: ['Point 1', 'Point 2', 'Point 3'],
+          bulletPoints: [
+            'State-of-the-art projector for impactful presentations.',
+            'Spacious layout to accommodate up to 30 attendees comfortably.',
+            'Amenities include whiteboard and flip chart for interactive sessions.',
+          ],
+          picture:
+            'https://www.pexels.com/photo/black-padded-leather-office-chairs-2976970/,',
         },
       ],
     },
@@ -160,10 +166,16 @@ db.once('open', async () => {
       ],
       meetingRooms: [
         {
-          maxCapacity: 30,
+          maxCapacity: 10,
           description:
             'A cozy meeting room with a large table and plenty of chairs',
-          bulletPoints: ['Point 1', 'Point 2', 'Point 3'],
+          bulletPoints: [
+            'Intimate setting with a large conference table ideal for team collaboration.',
+            'Abundant natural light creates a warm and inviting atmosphere.',
+            'Versatile seating arrangement to accommodate various meeting formats.',
+          ],
+          picture:
+            'https://www.pexels.com/photo/square-beige-wooden-table-with-chairs-260928/',
         },
       ],
     },
@@ -195,10 +207,16 @@ db.once('open', async () => {
       ],
       meetingRooms: [
         {
-          maxCapacity: 30,
+          maxCapacity: 50,
           description:
             'A professional and corporate meeting room with a great view of the city',
-          bulletPoints: ['Point 1', 'Point 2', 'Point 3'],
+          bulletPoints: [
+            'State-of-the-art audio-visual equipment for seamless presentations.',
+            'Executive-style furnishings and a polished ambiance for a professional setting.',
+            'Flexible seating arrangements to cater to various event types and sizes.',
+          ],
+          picture:
+            'https://www.pexels.com/photo/white-wooden-table-with-chairs-set-416320/',
         },
       ],
     },

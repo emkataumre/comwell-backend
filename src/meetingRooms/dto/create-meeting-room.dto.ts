@@ -12,4 +12,8 @@ export class CreateMeetingRoomDto {
   @IsArray()
   @IsNotEmpty()
   bulletPoints: string[];
+
+  @IsString()
+  @IsNotEmpty()
+  picture: string;
 }
