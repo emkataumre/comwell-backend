@@ -9,7 +9,6 @@ import { HotelsModule } from './hotels/hotels.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { MeetingRoomsModule } from './meetingRooms/meetingRooms.module';
 import { BookersinfoModule } from './bookersinfo/bookersinfo.module';
-import { BookerInfoModule } from './booker-info/booker-info.module';
 
 @Module({
   imports: [
@@ -21,7 +20,6 @@ import { BookerInfoModule } from './booker-info/booker-info.module';
     RoomsModule,
     MeetingRoomsModule,
     BookersinfoModule,
-    BookerInfoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

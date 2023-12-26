@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type BookerinfoDocument = HydratedDocument<Bookerinfo>;
 
@@ -17,11 +18,11 @@ export class Bookerinfo extends Document {
   @Prop({ required: true })
   fullName: string;
 
-  @Prop({ required: true, unique: true, index: true })
+  @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop({ type: Number })
-  phone?: number;
+  @Prop()
+  phone?: string;
 }
 
 export const MeetingSchema = SchemaFactory.createForClass(Bookerinfo);
