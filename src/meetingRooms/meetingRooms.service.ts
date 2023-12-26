@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMeetingRoomDto } from './dto/create-meeting-room.dto';
-import { UpdateMeetingRoomDto } from './dto/update-meeting-room.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
@@ -40,10 +39,6 @@ export class MeetingRoomsService {
   ): Promise<MeetingRoom> {
     const room = new this.meetingRoomModel(createMeetingRoomDto);
     return room.save();
-  }
-
-  update(id: number, updateMeetingRoomDto: UpdateMeetingRoomDto) {
-    return `This action updates a #${id} room`;
   }
 
   remove(id: number) {

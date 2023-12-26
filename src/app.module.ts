@@ -8,6 +8,8 @@ import { BookingsModule } from './bookings/bookings.module';
 import { HotelsModule } from './hotels/hotels.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { MeetingRoomsModule } from './meetingRooms/meetingRooms.module';
+import { BookersinfoModule } from './bookersinfo/bookersinfo.module';
+import { BookerInfoModule } from './booker-info/booker-info.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { MeetingRoomsModule } from './meetingRooms/meetingRooms.module';
     HotelsModule,
     RoomsModule,
     MeetingRoomsModule,
+    BookersinfoModule,
+    BookerInfoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
