@@ -22,6 +22,9 @@ export class Bookerinfo {
 
   @Prop({ type: Number })
   phone?: number;
+
+  @Prop()
+  comment?: string;
 }
 
 export const BookerinfoSchema = SchemaFactory.createForClass(Bookerinfo);

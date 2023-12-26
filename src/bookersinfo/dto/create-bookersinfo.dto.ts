@@ -19,4 +19,7 @@ export class CreateBookerinfoDto {
 
   @IsNotEmpty()
   phone: number;
+
+  @IsOptional()
+  comment: string;
 }
