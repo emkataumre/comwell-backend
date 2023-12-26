@@ -5,7 +5,7 @@ export class CreateUserDto {
     fullName: string,
     email: string,
     zipCode: number,
-    phone: number,
+    phone: string,
     password: string,
   ) {
     this.fullName = fullName;
@@ -23,7 +23,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   zipCode: number;
   @IsNotEmpty()
-  phone: number;
+  phone: string;
   @IsNotEmpty()
   password: string;
 }

@@ -18,7 +18,7 @@ export class Hotel {
   @Prop({ required: true })
   address: string;
   @Prop({ required: true })
-  phone: number;
+  phone: string;
   @Prop({ required: true })
   title: string;
 

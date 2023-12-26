@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsEmail } from 'class-validator';
 export class CreateGuestUserDto {
-  constructor(fullName: string, email: string, phone: number) {
+  constructor(fullName: string, email: string, phone: string) {
     this.fullName = fullName;
     this.email = email;
     this.phone = phone;
@@ -11,5 +11,5 @@ export class CreateGuestUserDto {
   @IsEmail()
   email: string;
   @IsNotEmpty()
-  phone: number;
+  phone: string;
 }

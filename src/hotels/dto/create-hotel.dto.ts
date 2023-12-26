@@ -4,7 +4,7 @@ export class CreateHotelDto {
     country: string,
     city: string,
     address: string,
-    phone: number,
+    phone: string,
     title: string,
   ) {
     this.country = country;
@@ -20,7 +20,7 @@ export class CreateHotelDto {
   @IsNotEmpty()
   address: string;
   @IsNotEmpty()
-  phone: number;
+  phone: string;
   @IsNotEmpty()
   title: string;
 }

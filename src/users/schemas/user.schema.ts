@@ -14,7 +14,7 @@ export class User {
   @Prop({ required: true })
   zipCode: number;
   @Prop({ required: true })
-  phone: number;
+  phone: string;
   @Prop({ required: true })
   password: string;
 }

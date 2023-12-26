@@ -15,7 +15,7 @@ export class CreateBookingDto {
   customerInfo: {
     fullName: string;
     email: string;
-    phone: number;
+    phone: string;
   };
 
   constructor(
@@ -25,7 +25,7 @@ export class CreateBookingDto {
     endDate: Date,
     fullName: string,
     email: string,
-    phone: number,
+    phone: string,
   ) {
     this.hotel = {
       hotelName,
