@@ -4,7 +4,7 @@ import { HydratedDocument } from 'mongoose';
 export type BookerinfoDocument = HydratedDocument<Bookerinfo>;
 
 @Schema()
-export class Bookerinfo extends Document {
+export class Bookerinfo {
   @Prop({ required: true })
   company: string;
 
@@ -24,4 +24,4 @@ export class Bookerinfo extends Document {
   phone?: number;
 }
 
-export const MeetingSchema = SchemaFactory.createForClass(Bookerinfo);
+export const BookerinfoSchema = SchemaFactory.createForClass(Bookerinfo);

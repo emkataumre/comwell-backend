@@ -10,8 +10,8 @@ export class BookersinfoService {
     @InjectModel(Bookerinfo.name) private userModel: Model<Bookerinfo>,
   ) {}
 
-  async create(createBookersinfoDto: CreateBookerinfoDto) {
-    const bookerInfo = new this.userModel(createBookersinfoDto);
+  async create(createBookerinfoDto: CreateBookerinfoDto) {
+    const bookerInfo = new this.userModel(createBookerinfoDto);
     return bookerInfo.save();
   }
 
