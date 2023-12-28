@@ -94,7 +94,11 @@ db.once('open', async () => {
             'Amenities include whiteboard and flip chart for interactive sessions.',
           ],
           picture:
+<<<<<<< HEAD
             'https://images.pexels.com/photos/2976970/pexels-photo-2976970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+=======
+            'https://images.pexels.com/photos/2976970/pexels-photo-2976970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,',
+>>>>>>> a0ec783b569ff27b33cf0b3491dbfb133e8a089f
         },
       ],
     },
@@ -216,7 +220,11 @@ db.once('open', async () => {
             'Flexible seating arrangements to cater to various event types and sizes.',
           ],
           picture:
+<<<<<<< HEAD
             'https://images.pexels.com/photos/416320/pexels-photo-416320.jpeg',
+=======
+            'https://images.pexels.com/photos/416320/pexels-photo-416320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+>>>>>>> a0ec783b569ff27b33cf0b3491dbfb133e8a089f
         },
       ],
     },
