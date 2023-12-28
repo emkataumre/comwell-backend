@@ -94,7 +94,7 @@ db.once('open', async () => {
             'Amenities include whiteboard and flip chart for interactive sessions.',
           ],
           picture:
-            'https://www.pexels.com/photo/black-padded-leather-office-chairs-2976970/,',
+            'https://images.pexels.com/photos/2976970/pexels-photo-2976970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,',
         },
       ],
     },
@@ -175,7 +175,7 @@ db.once('open', async () => {
             'Versatile seating arrangement to accommodate various meeting formats.',
           ],
           picture:
-            'https://www.pexels.com/photo/square-beige-wooden-table-with-chairs-260928/',
+            'https://images.pexels.com/photos/260928/pexels-photo-260928.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         },
       ],
     },
@@ -216,7 +216,7 @@ db.once('open', async () => {
             'Flexible seating arrangements to cater to various event types and sizes.',
           ],
           picture:
-            'https://www.pexels.com/photo/white-wooden-table-with-chairs-set-416320/',
+            'https://images.pexels.com/photos/416320/pexels-photo-416320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         },
       ],
     },
