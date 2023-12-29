@@ -3,9 +3,9 @@ import { TestingModule, Test } from '@nestjs/testing';
 import { TestModule } from '../src/test.module';
 import { UsersService } from '../src/users/users.service';
 import { ValidationPipe } from '@nestjs/common';
-import { CreateUserDto } from '../src/users/dto/create-user.dto';
 import * as request from 'supertest';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../src/auth/auth.service';
+import { CreateUserDto } from '../src/users/dto/create-user.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -18,6 +18,7 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     usersService = moduleFixture.get(UsersService);
+    authService = moduleFixture.get(AuthService);
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
     await usersService.removeAll();
@@ -42,7 +43,7 @@ describe('AppController (e2e)', () => {
     });
   });
 
-  describe('POST a user', () => {
+  describe('POST a new user', () => {
     it('creates a new user', async () => {
       const newUser = new CreateUserDto(
         'Emil The SmartPants',
@@ -51,8 +52,27 @@ describe('AppController (e2e)', () => {
         '1',
         'password',
       );
-      const createdUser = authService.signUp(newUser);
-      expect((await createdUser).access_token).toBeDefined();
+      const signUpResponse = await authService.signUp(newUser);
+      expect(signUpResponse.access_token).toBeDefined();
     });
   });
+
+  // describe('log in a user', () => {
+  //   it('logs in an existing user', async () => {
+  //     const newUser = new CreateUserDto(
+  //       'Emil The SmartPants',
+  //       'emil1@gmail.com',
+  //       10,
+  //       '1',
+  //       'password',
+  //     );
+  //     await authService.signUp(newUser);
+  //     const signInResponse = await authService.signIn(
+  //       'emil1@gmail.com',
+  //       'password',
+  //     );
+
+  //     expect(signInResponse.access_token).toBeDefined();
+  //   });
+  // });
 });

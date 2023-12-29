@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { BookingsModule } from './bookings/bookings.module';
-import { HotelsModule } from './hotels/hotels.module';
+import { HotelsModule } from '../src/hotels/hotels.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { MeetingRoomsModule } from './meetingRooms/meetingRooms.module';
 import { BookersinfoModule } from './bookersinfo/bookersinfo.module';

@@ -4,7 +4,7 @@ import { MeetingRoomsController } from './meetingRooms.controller';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { MeetingRoom, MeetingRoomSchema } from './schemas/meetingRooms.schema';
-import { HotelsModule } from 'src/hotels/hotels.module';
+import { HotelsModule } from '../hotels/hotels.module';
 
 @Module({
   imports: [

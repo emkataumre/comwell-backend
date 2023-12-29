@@ -3,8 +3,8 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking } from './schemas/booking.schema';
-import { UsersService } from 'src/users/users.service';
-import { HotelsService } from 'src/hotels/hotels.service';
+import { UsersService } from '../users/users.service';
+import { HotelsService } from '../hotels/hotels.service';
 
 @Injectable()
 export class BookingsService {

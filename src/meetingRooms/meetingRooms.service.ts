@@ -6,7 +6,7 @@ import {
   MeetingRoom,
   MeetingRoomDocument,
 } from './schemas/meetingRooms.schema';
-import { HotelsService } from 'src/hotels/hotels.service';
+import { HotelsService } from '../hotels/hotels.service';
 
 @Injectable()
 export class MeetingRoomsService {
