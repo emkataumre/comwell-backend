@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 export class CreateHotelDto {
   constructor(
     country: string,
@@ -14,13 +14,18 @@ export class CreateHotelDto {
     this.title = title;
   }
   @IsNotEmpty()
+  @IsString()
   country: string;
   @IsNotEmpty()
+  @IsString()
   city: string;
   @IsNotEmpty()
+  @IsString()
   address: string;
   @IsNotEmpty()
+  @IsString()
   phone: string;
   @IsNotEmpty()
+  @IsString()
   title: string;
 }

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsEmail, IsString } from 'class-validator';
 
 export class CreateBookerinfoDto {
   constructor(
@@ -36,6 +36,7 @@ export class CreateBookerinfoDto {
   email: string;
 
   @IsNotEmpty()
+  @IsString()
   phone: string;
 
   @IsOptional()

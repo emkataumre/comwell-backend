@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsArray,
-  IsInt,
-  ValidateNested,
-  IsNotEmpty,
-} from 'class-validator';
+import { IsString, IsArray, IsInt, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Amenity } from '../schemas/room.schema';
 
@@ -39,7 +33,6 @@ export class CreateRoomDto {
   pictures: string[];
 
   @Type(() => BedsDto)
-  @ValidateNested()
   beds: BedsDto;
 
   @Type(() => AmenitiesDto)

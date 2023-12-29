@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
 export class CreateGuestUserDto {
   constructor(fullName: string, email: string, phone: string) {
     this.fullName = fullName;
@@ -10,6 +10,7 @@ export class CreateGuestUserDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
+  @IsString()
   @IsNotEmpty()
   phone: string;
 }
