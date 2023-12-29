@@ -27,7 +27,7 @@ describe('AppController (e2e)', () => {
         'Emil The SmartPants',
         'emil@gmail.com',
         10,
-        1,
+        '1',
         'password',
       );
       const response = await request(app.getHttpServer())
@@ -38,5 +38,9 @@ describe('AppController (e2e)', () => {
       const result = response.body;
       expect(result._id.toString()).toBeDefined();
     });
+  });
+
+  describe('POST a user', () => {
+    it('creates a new user', async () => {});
   });
 });

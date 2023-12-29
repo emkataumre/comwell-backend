@@ -7,7 +7,6 @@ import {
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { User } from 'src/users/schemas/user.schema';
 import { SignInResponse } from './dto/signInResponse';
 import * as bcrypt from 'bcrypt';
 import { SignUpResponse } from './dto/signUpResponse';

@@ -1,6 +1,17 @@
-import { IsString, IsArray, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNumber, IsString, IsArray, IsNotEmpty } from 'class-validator';
 
 export class CreateMeetingRoomDto {
+  constructor(
+    maxCapacity: number,
+    description: string,
+    bulletPoints: string[],
+    picture: string,
+  ) {
+    this.maxCapacity = maxCapacity;
+    this.description = description;
+    this.bulletPoints = bulletPoints;
+    this.picture = picture;
+  }
   @IsNumber()
   @IsNotEmpty()
   maxCapacity: number;

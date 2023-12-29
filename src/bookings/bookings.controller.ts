@@ -1,16 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
 
-import { Booking } from './schemas/booking.schema';
-import { CreateGuestUserDto } from 'src/users/dto/create-guest-user.dto';
 import { CreateBookingDto } from './dto/create-booking.dto';
 
 @Controller('bookings')

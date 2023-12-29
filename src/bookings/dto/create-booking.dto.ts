@@ -2,22 +2,6 @@ import { IsNotEmpty } from 'class-validator';
 import { Room } from 'src/rooms/schemas/room.schema';
 
 export class CreateBookingDto {
-  @IsNotEmpty()
-  hotel: {
-    hotelName: string;
-    rooms: Room[];
-    dates: {
-      startDate: Date;
-      endDate: Date;
-    };
-  };
-  @IsNotEmpty()
-  customerInfo: {
-    fullName: string;
-    email: string;
-    phone: string;
-  };
-
   constructor(
     hotelName: string,
     rooms: Room[],
@@ -41,4 +25,19 @@ export class CreateBookingDto {
       phone,
     };
   }
+  @IsNotEmpty()
+  hotel: {
+    hotelName: string;
+    rooms: Room[];
+    dates: {
+      startDate: Date;
+      endDate: Date;
+    };
+  };
+  @IsNotEmpty()
+  customerInfo: {
+    fullName: string;
+    email: string;
+    phone: string;
+  };
 }

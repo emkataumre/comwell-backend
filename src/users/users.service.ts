@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { CreateGuestUserDto } from './dto/create-guest-user.dto';
 import { GuestUser } from './schemas/guest-user.schema';
@@ -36,11 +35,6 @@ export class UsersService {
 
   async findOneByEmail(email: string) {
     return this.userModel.findOne({ email }).exec();
-  }
-
-  update(id: string, updateUserDto: UpdateUserDto) {
-    const updatedUser = this.userModel.findByIdAndUpdate(id, updateUserDto);
-    return updatedUser;
   }
 
   remove(id: string) {

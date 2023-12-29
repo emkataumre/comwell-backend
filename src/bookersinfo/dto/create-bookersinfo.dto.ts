@@ -1,6 +1,24 @@
 import { IsNotEmpty, IsOptional, IsEmail } from 'class-validator';
 
 export class CreateBookerinfoDto {
+  constructor(
+    company: string,
+    fullName: string,
+    email: string,
+    phone: string,
+    optionalDepartment?: string,
+    optionalMeetingName?: string,
+    comment?: string,
+  ) {
+    this.company = company;
+    this.optionalDepartment = optionalDepartment;
+    this.optionalMeetingName = optionalMeetingName;
+    this.fullName = fullName;
+    this.email = email;
+    this.phone = phone;
+    this.comment = comment;
+  }
+
   @IsNotEmpty()
   company: string;
 
