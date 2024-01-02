@@ -11,9 +11,13 @@ export class HotelsService {
     @InjectModel(Hotel.name) private hotelModel: Model<HotelDocument>,
   ) {}
 
-  async create(createHotelDto: CreateHotelDto) {
+  create(createHotelDto: CreateHotelDto) {
     const hotel = new this.hotelModel(createHotelDto);
-    return hotel.save() as Promise<Hotel>; //This should be an actual promise, currently there is no async on createHotel (TODO?)
+
+    return new Promise<Hotel>(async (resolve) => {
+      const savedHotel = await hotel.save();
+      resolve(savedHotel);
+    });
   }
 
   async findRoomByNumber(id: string, roomNumber: number) {
