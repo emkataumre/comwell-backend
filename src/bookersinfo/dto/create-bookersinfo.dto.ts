@@ -36,7 +36,6 @@ export class CreateBookerinfoDto {
   email: string;
 
   @IsNotEmpty()
-  @IsString()
   phone: string;
 
   @IsOptional()
