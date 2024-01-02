@@ -1,13 +1,13 @@
-import { IsString, IsArray, IsInt, IsNotEmpty } from 'class-validator';
+import { IsString, IsArray, IsNotEmpty, IsNumber } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Amenity } from '../schemas/room.schema';
 
 class BedsDto {
-  @IsInt()
+  @IsNumber()
   @IsNotEmpty()
   double: number;
 
-  @IsInt()
+  @IsNumber()
   @IsNotEmpty()
   single: number;
 }

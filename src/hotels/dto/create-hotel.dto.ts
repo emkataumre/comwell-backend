@@ -23,7 +23,6 @@ export class CreateHotelDto {
   @IsString()
   address: string;
   @IsNotEmpty()
-  @IsString()
   phone: string;
   @IsNotEmpty()
   @IsString()

@@ -10,7 +10,6 @@ export class CreateGuestUserDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
-  @IsString()
   @IsNotEmpty()
   phone: string;
 }
