@@ -5,10 +5,12 @@ import { UsersService } from '../src/users/users.service';
 import { ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from '../src/users/dto/create-user.dto';
 import * as request from 'supertest';
+import { AuthService } from 'src/auth/auth.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let usersService: UsersService;
+  let authService: AuthService;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [TestModule],
@@ -26,8 +28,8 @@ describe('AppController (e2e)', () => {
       const newUser = new CreateUserDto(
         'Emil The SmartPants',
         'emil@gmail.com',
-        10,
-        1,
+        '10',
+        '1',
         'password',
       );
       const response = await request(app.getHttpServer())
@@ -37,6 +39,20 @@ describe('AppController (e2e)', () => {
       const users = usersService.findAll();
       const result = response.body;
       expect(result._id.toString()).toBeDefined();
+    });
+  });
+
+  describe('POST a user', () => {
+    it('creates a new user', async () => {
+      const newUser = new CreateUserDto(
+        'Emil The SmartPants',
+        'emil@gmail.com',
+        '10',
+        '1',
+        'password',
+      );
+      const createdUser = authService.signUp(newUser);
+      expect((await createdUser).access_token).toBeDefined();
     });
   });
 });

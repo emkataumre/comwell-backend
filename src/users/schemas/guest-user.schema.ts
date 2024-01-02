@@ -12,6 +12,6 @@ export class GuestUser {
   @Prop({ required: true, unique: true })
   email: string;
   @Prop({ required: true })
-  phone: number;
+  phone: string;
 }
 export const GuestUserSchema = SchemaFactory.createForClass(GuestUser);

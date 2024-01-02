@@ -4,7 +4,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 export class Beds {
   @Prop({ required: true })
   double: number;
-
   @Prop({ required: true })
   single: number;
 }

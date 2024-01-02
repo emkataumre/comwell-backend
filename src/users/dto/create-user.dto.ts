@@ -4,8 +4,8 @@ export class CreateUserDto {
   constructor(
     fullName: string,
     email: string,
-    zipCode: number,
-    phone: number,
+    zipCode: string,
+    phone: string,
     password: string,
   ) {
     this.fullName = fullName;
@@ -21,9 +21,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   email: string;
   @IsNotEmpty()
-  zipCode: number;
+  zipCode: string;
   @IsNotEmpty()
-  phone: number;
+  phone: string;
   @IsNotEmpty()
   password: string;
 }

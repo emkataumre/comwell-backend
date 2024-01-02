@@ -7,7 +7,6 @@ import {
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { User } from 'src/users/schemas/user.schema';
 import { SignInResponse } from './dto/signInResponse';
 import * as bcrypt from 'bcrypt';
 import { SignUpResponse } from './dto/signUpResponse';
@@ -22,7 +21,7 @@ export class AuthService {
     this.jwtService = jwtService;
   }
 
-  async signIn(email: string, pass: string): Promise<SignInResponse> {
+  async signIn(email: string, pass: string) {
     const user = await this.usersService.findOneByEmail(email);
 
     if (!(await bcrypt.compare(pass, user?.password))) {
@@ -36,10 +35,10 @@ export class AuthService {
     };
     return {
       access_token: await this.jwtService.signAsync(payload),
-    };
+    } as SignInResponse;
   }
 
-  async signUp(createUserDto: CreateUserDto): Promise<SignUpResponse> {
+  async signUp(createUserDto: CreateUserDto) {
     const userEmail = await this.usersService.findOneByEmail(
       createUserDto.email,
     );
@@ -56,7 +55,7 @@ export class AuthService {
       this.usersService.create(createUserDto);
       return {
         access_token: await this.jwtService.signAsync(payload),
-      };
+      } as SignUpResponse;
     }
   }
 }
