@@ -28,7 +28,7 @@ describe('AppController (e2e)', () => {
       const newUser = new CreateUserDto(
         'Emil The SmartPants',
         'emil@gmail.com',
-        10,
+        '10',
         '1',
         'password',
       );
@@ -47,7 +47,7 @@ describe('AppController (e2e)', () => {
       const newUser = new CreateUserDto(
         'Emil The SmartPants',
         'emil@gmail.com',
-        10,
+        '10',
         '1',
         'password',
       );
